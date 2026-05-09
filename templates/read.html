@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Повідомлення</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">
+                        <img src="/logo.png" alt="logo" />
+                    </a>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/message">Send message</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/read">Read</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mt-4">
+            <h1 class="mb-3">Збережені повідомлення</h1>
+
+            {% if messages %}
+            <div class="list-group">
+                {% for timestamp, data in messages.items()|reverse %}
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ data.username }}</h5>
+                        <small>{{ timestamp }}</small>
+                    </div>
+                    <p class="mb-1">{{ data.message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>Ще немає жодного повідомлення.</p>
+            {% endif %}
+        </main>
+    </body>
+</html>
